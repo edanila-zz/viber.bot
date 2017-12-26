@@ -98,6 +98,9 @@ namespace Viber.Bot
 		public Task<long> SendStickerMessageAsync(StickerMessage message) => SendMessageAsync(message);
 
 		/// <inheritdoc />
+		public Task<long> SendKeyboardMessageAsync(KeyboardMessage message) => SendMessageAsync(message);
+
+		/// <inheritdoc />
 		public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)
 		{
 			var hash = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(jsonMessage));

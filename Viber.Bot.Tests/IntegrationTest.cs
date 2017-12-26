@@ -187,5 +187,32 @@ namespace Viber.Bot.Tests
 			});
 			return;
 		}
+
+		[TestMethod]
+		public async Task SendKeyboardMessageAsyncTest()
+		{
+			var result = await _viberBotClient.SendKeyboardMessageAsync(new KeyboardMessage
+			{
+				Receiver = _adminId,
+				Sender = new UserBase
+				{
+					Name = "Smbdy"
+				},
+				Text = "Test keyboard",
+				Keyboard = new Keyboard
+				{
+					Buttons = new[]
+					{
+						new KeyboardButton
+						{
+							Text = "Button 1",
+							ActionBody = "AB1"
+						}
+					}
+				},
+				TrackingData = "td"
+			});
+			return;
+		}
 	}
 }
