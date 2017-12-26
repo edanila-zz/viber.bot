@@ -103,9 +103,21 @@ namespace Viber.Bot
 		/// <inheritdoc />
 		public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)
 		{
-			var hash = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(jsonMessage));
-			var signature = ParseHex(signatureHeader);
-			return StructuralComparisons.StructuralEqualityComparer.Equals(hash, signature);
+			if (signatureHeader == null || jsonMessage == null)
+			{
+				return false;
+			}
+
+			try
+			{
+				var hash = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(jsonMessage));
+				var signature = ParseHex(signatureHeader);
+				return StructuralComparisons.StructuralEqualityComparer.Equals(hash, signature);
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		/// <summary>
