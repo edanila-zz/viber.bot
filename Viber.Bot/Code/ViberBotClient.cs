@@ -167,6 +167,11 @@ namespace Viber.Bot
 		}
 
 #if !NET461
+		/// <summary>
+		/// Parsing hex.
+		/// </summary>
+		/// <param name="hex">Hex string.</param>
+		/// <returns>Array of bytes.</returns>
 		private byte[] ParseHex(string hex)
 		{
 			var numberChars = hex.Length;
@@ -180,6 +185,10 @@ namespace Viber.Bot
 		}
 #endif
 
+		/// <summary>
+		/// Releases the unmanaged resources used by the <see cref="ViberBotClient"/> and optionally disposes of the managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to releases only unmanaged resources.</param>
 		protected virtual void Dispose(bool disposing)
 		{
 			if (disposing)

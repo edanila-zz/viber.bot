@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461;netcoreapp2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.2</Version>
+    <Authors>Danila Egorov</Authors>
+    <Company />
+    <Product />
+    <Description>C# wrapper for the Viber REST API (Public Accounts / bots).</Description>
+    <PackageTags>Viber Bot</PackageTags>
+    <PackageProjectUrl>https://github.com/edanila/viber.bot</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
