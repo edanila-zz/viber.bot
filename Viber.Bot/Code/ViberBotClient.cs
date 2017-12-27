@@ -111,7 +111,13 @@ namespace Viber.Bot
 			try
 			{
 				var hash = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(jsonMessage));
+
+#if NET461
+				var signature = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary.Parse(signatureHeader).Value;
+#else
 				var signature = ParseHex(signatureHeader);
+#endif
+
 				return StructuralComparisons.StructuralEqualityComparer.Equals(hash, signature);
 			}
 			catch
@@ -160,6 +166,7 @@ namespace Viber.Bot
 			return result;
 		}
 
+#if !NET461
 		private byte[] ParseHex(string hex)
 		{
 			var numberChars = hex.Length;
@@ -171,6 +178,7 @@ namespace Viber.Bot
 
 			return bytes;
 		}
+#endif
 
 		protected virtual void Dispose(bool disposing)
 		{
