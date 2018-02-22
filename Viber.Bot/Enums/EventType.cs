@@ -57,6 +57,12 @@ namespace Viber.Bot
 		/// Event 'webhook'.
 		/// </summary>
 		[EnumMember(Value = "webhook")]
-		Webhook = 8
+		Webhook = 8,
+
+		/// <summary>
+		/// Event 'action'.
+		/// </summary>
+		[EnumMember(Value = "action")]
+		Action = 9
 	}
 }
