@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Viber.Bot
 {
@@ -23,7 +24,7 @@ namespace Viber.Bot
 		/// <summary>
 		/// HTTP client.
 		/// </summary>
-		private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("https://chatapi.viber.com/pa/") };
+		private readonly HttpClient _httpClient;
 
 		/// <summary>
 		/// Hash algorithm.
@@ -40,8 +41,23 @@ namespace Viber.Bot
 		/// </summary>
 		/// <param name="authenticationToken">Authentication token.</param>
 		public ViberBotClient(string authenticationToken)
+			: this(authenticationToken, null)
 		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ViberBotClient"/> class.
+		/// </summary>
+		/// <param name="authenticationToken">Authentication token.</param>
+		/// <param name="proxy">Proxy server.</param>
+		public ViberBotClient(string authenticationToken, IWebProxy proxy)
+		{
+			_httpClient = proxy == null
+				? new HttpClient()
+				: new HttpClient(new HttpClientHandler { Proxy = proxy, UseProxy = true });
+			_httpClient.BaseAddress = new Uri("https://chatapi.viber.com/pa/");
 			_httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
+
 			_hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
 		}
 
