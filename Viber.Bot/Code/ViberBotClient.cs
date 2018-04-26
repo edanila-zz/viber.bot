@@ -21,10 +21,10 @@ namespace Viber.Bot
 		/// </summary>
 		public const string XViberContentSignatureHeader = "X-Viber-Content-Signature";
 
-        /// <summary>
-        /// HTTP client.
-        /// </summary>
-        private readonly HttpClient _httpClient;
+		/// <summary>
+		/// HTTP client.
+		/// </summary>
+		private readonly HttpClient _httpClient;
 
 		/// <summary>
 		/// Hash algorithm.
@@ -36,19 +36,30 @@ namespace Viber.Bot
 		/// </summary>
 		private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ViberBotClient"/> class.
-        /// </summary>
-        /// <param name="authenticationToken">Authentication token.</param>
-        /// <param name="proxy">Proxy server.</param>
-        public ViberBotClient(string authenticationToken, IWebProxy proxy = null)
-        {
-            _httpClient = proxy != null ? new HttpClient(new HttpClientHandler() { Proxy = proxy, UseProxy = true }) : new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://chatapi.viber.com/pa/");
-            _httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ViberBotClient"/> class.
+		/// </summary>
+		/// <param name="authenticationToken">Authentication token.</param>
+		public ViberBotClient(string authenticationToken)
+			: this(authenticationToken, null)
+		{
+		}
 
-            _hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
-        }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ViberBotClient"/> class.
+		/// </summary>
+		/// <param name="authenticationToken">Authentication token.</param>
+		/// <param name="proxy">Proxy server.</param>
+		public ViberBotClient(string authenticationToken, IWebProxy proxy)
+		{
+			_httpClient = proxy == null
+				? new HttpClient()
+				: new HttpClient(new HttpClientHandler { Proxy = proxy, UseProxy = true });
+			_httpClient.BaseAddress = new Uri("https://chatapi.viber.com/pa/");
+			_httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
+
+			_hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
+		}
 
 		/// <inheritdoc />
 		public async Task<ICollection<EventType>> SetWebhookAsync(string url, ICollection<EventType> eventTypes = null)
