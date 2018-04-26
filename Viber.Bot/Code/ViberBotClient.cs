@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Viber.Bot
 {
@@ -20,10 +21,10 @@ namespace Viber.Bot
 		/// </summary>
 		public const string XViberContentSignatureHeader = "X-Viber-Content-Signature";
 
-		/// <summary>
-		/// HTTP client.
-		/// </summary>
-		private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("https://chatapi.viber.com/pa/") };
+        /// <summary>
+        /// HTTP client.
+        /// </summary>
+        private readonly HttpClient _httpClient;
 
 		/// <summary>
 		/// Hash algorithm.
@@ -35,15 +36,19 @@ namespace Viber.Bot
 		/// </summary>
 		private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ViberBotClient"/> class.
-		/// </summary>
-		/// <param name="authenticationToken">Authentication token.</param>
-		public ViberBotClient(string authenticationToken)
-		{
-			_httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
-			_hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViberBotClient"/> class.
+        /// </summary>
+        /// <param name="authenticationToken">Authentication token.</param>
+        /// <param name="proxy">Proxy server.</param>
+        public ViberBotClient(string authenticationToken, IWebProxy proxy = null)
+        {
+            _httpClient = proxy != null ? new HttpClient(new HttpClientHandler() { Proxy = proxy, UseProxy = true }) : new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://chatapi.viber.com/pa/");
+            _httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
+
+            _hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
+        }
 
 		/// <inheritdoc />
 		public async Task<ICollection<EventType>> SetWebhookAsync(string url, ICollection<EventType> eventTypes = null)
