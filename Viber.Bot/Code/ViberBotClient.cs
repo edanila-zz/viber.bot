@@ -22,6 +22,16 @@ namespace Viber.Bot
 		public const string XViberContentSignatureHeader = "X-Viber-Content-Signature";
 
 		/// <summary>
+		/// Header "X-Viber-Auth-Token".
+		/// </summary>
+		private const string XViberAuthTokenHeader = "X-Viber-Auth-Token";
+
+		/// <summary>
+		/// Base address.
+		/// </summary>
+		private const string BaseAddress = "https://chatapi.viber.com/pa/";
+
+		/// <summary>
 		/// HTTP client.
 		/// </summary>
 		private readonly HttpClient _httpClient;
@@ -55,8 +65,8 @@ namespace Viber.Bot
 			_httpClient = proxy == null
 				? new HttpClient()
 				: new HttpClient(new HttpClientHandler { Proxy = proxy, UseProxy = true });
-			_httpClient.BaseAddress = new Uri("https://chatapi.viber.com/pa/");
-			_httpClient.DefaultRequestHeaders.Add("X-Viber-Auth-Token", new[] { authenticationToken });
+			_httpClient.BaseAddress = new Uri(BaseAddress);
+			_httpClient.DefaultRequestHeaders.Add(XViberAuthTokenHeader, new[] { authenticationToken });
 
 			_hashAlgorithm = new HMACSHA256(Encoding.UTF8.GetBytes(authenticationToken));
 		}
