@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -214,5 +215,23 @@ namespace Viber.Bot.Tests
 			});
 			return;
 		}
-	}
+
+		[TestMethod]
+		public async Task SendBroadcastMessageAsyncTest()
+		{
+			var result = await _viberBotClient.SendBroadcastMessageAsync(new TextMessage
+			{
+				Sender = new UserBase
+				{
+					Name = "Smbdy"
+				},
+				Text = "Broadcast message!:)",
+				BroadcastList = new List<string>
+				{
+					_adminId
+                }
+			});
+			return;
+		}
+    }
 }
