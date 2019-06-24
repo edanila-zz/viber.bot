@@ -46,11 +46,5 @@ namespace Viber.Bot
 		/// </summary>
 		[JsonProperty("min_api_version")]
 		public double? MinApiVersion { get; set; }
-
-        /// <summary>
-        /// The list of ids account to send messages to multiple Viber users who subscribe to the account. 
-        /// </summary>
-        [JsonProperty("broadcast_list")]
-        public List<string> BroadcastList { get; set; }
     }
 }

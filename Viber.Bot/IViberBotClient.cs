@@ -92,19 +92,19 @@ namespace Viber.Bot
 		/// <returns>Message token.</returns>
 		Task<long> SendKeyboardMessageAsync(KeyboardMessage message);
 
-        /// <summary>
-        /// Sends broadcast message to Viber users.
-        /// </summary>
-        /// <param name="message">Instance of <see cref="TextMessage"/>.</param>
-        /// <returns>Message token.</returns>
-        Task<long> SendBroadcastMessageAsync(TextMessage message);
+		/// <summary>
+		/// Sends broadcast message to Viber users.
+		/// </summary>
+		/// <param name="message">Instance of <see cref="TextMessage"/>.</param>
+		/// <returns>Message token.</returns>
+		Task<long> SendBroadcastMessageAsync(BroadcastMessage message);
 
-        /// <summary>
-        /// Validate hash.
-        /// </summary>
-        /// <param name="signatureHeader">Value of "X-Viber-Content-Signature" header.</param>
-        /// <param name="jsonMessage">JSON message.</param>
-        /// <returns><c>true</c> if valid.</returns>
-        bool ValidateWebhookHash(string signatureHeader, string jsonMessage);
+		/// <summary>
+		/// Validate hash.
+		/// </summary>
+		/// <param name="signatureHeader">Value of "X-Viber-Content-Signature" header.</param>
+		/// <param name="jsonMessage">JSON message.</param>
+		/// <returns><c>true</c> if valid.</returns>
+		bool ValidateWebhookHash(string signatureHeader, string jsonMessage);
 	}
 }

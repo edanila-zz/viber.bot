@@ -219,7 +219,7 @@ namespace Viber.Bot.Tests
 		[TestMethod]
 		public async Task SendBroadcastMessageAsyncTest()
 		{
-			var result = await _viberBotClient.SendBroadcastMessageAsync(new TextMessage
+			var result = await _viberBotClient.SendBroadcastMessageAsync(new BroadcastMessage
 			{
 				Sender = new UserBase
 				{
@@ -229,9 +229,9 @@ namespace Viber.Bot.Tests
 				BroadcastList = new List<string>
 				{
 					_adminId
-                }
+				}
 			});
 			return;
 		}
-    }
+	}
 }

@@ -127,10 +127,10 @@ namespace Viber.Bot
 		public Task<long> SendKeyboardMessageAsync(KeyboardMessage message) => SendMessageAsync(message);
 
 		/// <inheritdoc />
-		public Task<long> SendBroadcastMessageAsync(TextMessage message) => SendBroadcastAsync(message);
+		public Task<long> SendBroadcastMessageAsync(BroadcastMessage message) => SendBroadcastAsync(message);
 
 		/// <inheritdoc />
-        public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)
+		public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)
 		{
 			if (signatureHeader == null || jsonMessage == null)
 			{
@@ -171,20 +171,20 @@ namespace Viber.Bot
 		/// </summary>
 		/// <param name="message">Instance of <see cref="TextMessage"/>.</param>
 		/// <returns>Message token.</returns>
-        private async Task<long> SendBroadcastAsync(MessageBase message)
+		private async Task<long> SendBroadcastAsync(BroadcastMessage message)
 		{
 			var result = await RequestApiAsync<SendMessageResponse>("broadcast_message", message);
 			return result.MessageToken;
 		}
 
-        /// <summary>
-        /// Making API request.
-        /// </summary>
-        /// <param name="method">Method name.</param>
-        /// <param name="data">Post data.</param>
-        /// <typeparam name="T">Response type.</typeparam>
-        /// <returns><typeparamref name="T"/> object.</returns>
-        private async Task<T> RequestApiAsync<T>(string method, object data = null)
+		/// <summary>
+		/// Making API request.
+		/// </summary>
+		/// <param name="method">Method name.</param>
+		/// <param name="data">Post data.</param>
+		/// <typeparam name="T">Response type.</typeparam>
+		/// <returns><typeparamref name="T"/> object.</returns>
+		private async Task<T> RequestApiAsync<T>(string method, object data = null)
 			where T : ApiResponseBase, new()
 		{
 			var requestJson = data == null
