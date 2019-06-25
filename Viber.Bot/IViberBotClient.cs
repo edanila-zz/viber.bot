@@ -93,6 +93,13 @@ namespace Viber.Bot
 		Task<long> SendKeyboardMessageAsync(KeyboardMessage message);
 
 		/// <summary>
+		/// Sends broadcast message to Viber users.
+		/// </summary>
+		/// <param name="message">Instance of <see cref="BroadcastMessage"/>.</param>
+		/// <returns>Message token.</returns>
+		Task<long> SendBroadcastMessageAsync(BroadcastMessage message);
+
+		/// <summary>
 		/// Validate hash.
 		/// </summary>
 		/// <param name="signatureHeader">Value of "X-Viber-Content-Signature" header.</param>
