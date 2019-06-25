@@ -127,7 +127,7 @@ namespace Viber.Bot
 		public Task<long> SendKeyboardMessageAsync(KeyboardMessage message) => SendMessageAsync(message);
 
 		/// <inheritdoc />
-		public Task<long> SendBroadcastMessageAsync(BroadcastMessage message) => SendBroadcastAsync(message);
+		public Task<long> SendBroadcastMessageAsync(BroadcastMessage message) => SendMessageAsync(message, true);
 
 		/// <inheritdoc />
 		public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)
@@ -159,21 +159,11 @@ namespace Viber.Bot
 		/// Sends message to Viber user.
 		/// </summary>
 		/// <param name="message">Instance of message</param>
+		/// <param name="isBroadcast"><c>true</c> if broadcast message, otherwise - <c>false</c>.</param>
 		/// <returns>Message token.</returns>
-		private async Task<long> SendMessageAsync(MessageBase message)
+		private async Task<long> SendMessageAsync(MessageBase message, bool isBroadcast = false)
 		{
-			var result = await RequestApiAsync<SendMessageResponse>("send_message", message);
-			return result.MessageToken;
-		}
-
-		/// <summary>
-		/// Sends broadcast message to Viber users.
-		/// </summary>
-		/// <param name="message">Instance of <see cref="TextMessage"/>.</param>
-		/// <returns>Message token.</returns>
-		private async Task<long> SendBroadcastAsync(BroadcastMessage message)
-		{
-			var result = await RequestApiAsync<SendMessageResponse>("broadcast_message", message);
+			var result = await RequestApiAsync<SendMessageResponse>(isBroadcast ? "broadcast_message" : "send_message", message);
 			return result.MessageToken;
 		}
 

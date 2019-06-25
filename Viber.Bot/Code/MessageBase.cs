@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Viber.Bot
 {
@@ -46,5 +45,5 @@ namespace Viber.Bot
 		/// </summary>
 		[JsonProperty("min_api_version")]
 		public double? MinApiVersion { get; set; }
-    }
+	}
 }

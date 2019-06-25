@@ -95,7 +95,7 @@ namespace Viber.Bot
 		/// <summary>
 		/// Sends broadcast message to Viber users.
 		/// </summary>
-		/// <param name="message">Instance of <see cref="TextMessage"/>.</param>
+		/// <param name="message">Instance of <see cref="BroadcastMessage"/>.</param>
 		/// <returns>Message token.</returns>
 		Task<long> SendBroadcastMessageAsync(BroadcastMessage message);
 

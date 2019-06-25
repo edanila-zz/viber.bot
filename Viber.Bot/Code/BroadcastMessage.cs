@@ -23,9 +23,9 @@ namespace Viber.Bot
 		public string Text { get; set; }
 
 		/// <summary>
-		/// The list of ids account to send messages to multiple Viber users who subscribe to the account. 
+		/// The list of accounts identifiers to send messages to multiple Viber users (who subscribed to the account).
 		/// </summary>
 		[JsonProperty("broadcast_list")]
-		public List<string> BroadcastList { get; set; }
+		public IList<string> BroadcastList { get; set; }
 	}
 }

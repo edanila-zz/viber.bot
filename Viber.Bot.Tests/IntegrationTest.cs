@@ -226,7 +226,7 @@ namespace Viber.Bot.Tests
 					Name = "Smbdy"
 				},
 				Text = "Broadcast message!:)",
-				BroadcastList = new List<string>
+				BroadcastList = new []
 				{
 					_adminId
 				}
