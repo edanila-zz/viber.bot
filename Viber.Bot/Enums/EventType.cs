@@ -63,6 +63,12 @@ namespace Viber.Bot
 		/// Event 'action'.
 		/// </summary>
 		[EnumMember(Value = "action")]
-		Action = 9
+		Action = 9,
+
+		/// <summary>
+		/// Event 'client_status'.
+		/// </summary>
+		[EnumMember(Value = "client_status")]
+		ClientStatus = 10
 	}
 }
