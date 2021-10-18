@@ -100,6 +100,13 @@ namespace Viber.Bot
 		Task<long> SendBroadcastMessageAsync(BroadcastMessage message);
 
 		/// <summary>
+		/// Sends carousel message to Viber user.
+		/// </summary>
+		/// <param name="message">Instance of <see cref="CarouselMessage"/>.</param>
+		/// <returns>Message token.</returns>
+		Task<long> SendCarouselMessageAsync(CarouselMessage message);
+
+		/// <summary>
 		/// Validate hash.
 		/// </summary>
 		/// <param name="signatureHeader">Value of "X-Viber-Content-Signature" header.</param>
