@@ -233,5 +233,71 @@ namespace Viber.Bot.Tests
 			});
 			return;
 		}
+
+		[TestMethod]
+		public async Task SendCarouselMessageAsyncTest()
+		{
+			var result = await _viberBotClient.SendCarouselMessageAsync(new CarouselMessage
+			{
+				Receiver = _adminId,
+				Sender = new UserBase
+				{
+					Name = "Smbdy"
+				},
+				AltText = "AltText",
+				Carousel = new Carousel
+				{
+					ButtonsGroupColumns = 6,
+					ButtonsGroupRows = 7,
+					BackgroundColor = "#FFFFFF",
+					Buttons = new[]
+					{
+						new KeyboardButton
+						{
+							Columns = 6,
+							Rows = 3,
+							ActionType = KeyboardActionType.OpenUrl,
+							ActionBody = "https://www.google.com",
+							Image = "http://html-test:8080/myweb/guy/assets/imageRMsmall2.png"
+						},
+						new KeyboardButton
+						{
+							Columns = 6,
+							Rows = 2,
+							ActionType = KeyboardActionType.OpenUrl,
+							ActionBody = "https://www.google.com",
+							TextSize = TextSize.Regular,
+							TextHorizontalAlign = TextHorizontalAlign.Left,
+							TextVerticalAlign = TextVerticalAlign.Middle,
+							Text = "<font color=#323232><b>Headphones with Microphone, On-ear Wired earphones</b></font><font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>"
+						},
+						new KeyboardButton
+						{
+							Columns = 6,
+							Rows = 1,
+							ActionType = KeyboardActionType.Reply,
+							ActionBody = "https://www.google.com",
+							TextSize = TextSize.Large,
+							TextHorizontalAlign = TextHorizontalAlign.Center,
+							TextVerticalAlign = TextVerticalAlign.Middle,
+							Text = "<font color=#ffffff>Buy</font>",
+							Image = "https://s14.postimg.org/4mmt4rw1t/Button.png"
+						},
+						new KeyboardButton
+						{
+							Columns = 6,
+							Rows = 1,
+							ActionType = KeyboardActionType.Reply,
+							ActionBody = "https://www.google.com",
+							TextSize = TextSize.Small,
+							TextHorizontalAlign = TextHorizontalAlign.Center,
+							TextVerticalAlign = TextVerticalAlign.Middle,
+							Text = "<font color=#8367db>MORE DETAILS</font>",
+						},
+					}
+				}
+			});
+			return;
+		}
 	}
 }
