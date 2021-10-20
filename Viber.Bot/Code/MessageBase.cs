@@ -45,5 +45,11 @@ namespace Viber.Bot
 		/// </summary>
 		[JsonProperty("min_api_version")]
 		public double? MinApiVersion { get; set; }
+
+		/// <summary>
+		/// Keyboard object.
+		/// </summary>
+		[JsonProperty("keyboard")]
+		public Keyboard Keyboard { get; set; }
 	}
 }

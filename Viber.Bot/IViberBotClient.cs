@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Viber.Bot
@@ -90,6 +91,8 @@ namespace Viber.Bot
 		/// </summary>
 		/// <param name="message">Instance of <see cref="KeyboardMessage"/>.</param>
 		/// <returns>Message token.</returns>
+
+		[Obsolete("KeyboardMessage is deprecated, please use property MessageBase.Keyboard instead.")]
 		Task<long> SendKeyboardMessageAsync(KeyboardMessage message);
 
 		/// <summary>
