@@ -124,6 +124,7 @@ namespace Viber.Bot
 		public Task<long> SendStickerMessageAsync(StickerMessage message) => SendMessageAsync(message);
 
 		/// <inheritdoc />
+		[Obsolete("KeyboardMessage is deprecated, please use property MessageBase.Keyboard instead.")]
 		public Task<long> SendKeyboardMessageAsync(KeyboardMessage message) => SendMessageAsync(message);
 
 		/// <inheritdoc />

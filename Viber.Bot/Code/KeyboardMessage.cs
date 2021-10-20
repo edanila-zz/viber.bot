@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Viber.Bot
 {
 	/// <summary>
 	/// Keyboard message.
 	/// </summary>
+	[Obsolete("KeyboardMessage is deprecated, please use property MessageBase.Keyboard instead.")]
 	public class KeyboardMessage : MessageBase
 	{
 		/// <summary>
@@ -21,10 +23,5 @@ namespace Viber.Bot
 		[JsonProperty("text")]
 		public string Text { get; set; }
 
-		/// <summary>
-		/// Keyboard object.
-		/// </summary>
-		[JsonProperty("keyboard")]
-		public Keyboard Keyboard { get; set; }
 	}
 }
